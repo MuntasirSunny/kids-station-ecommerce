@@ -1,7 +1,32 @@
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-const Nav = () => {
+const links = [
+  {
+    name: "Home",
+    path: "/",
+  },
+  {
+    name: "Our Products",
+    path: "/our-products",
+  },
+]
+
+const Nav = ({containerStyles}) => {
+  
+  const pathname = usePathname();
+
   return (
-    <div>Nav</div>
+    <nav className={`${containerStyles}`}>
+      {links.map((link, index)=> {
+        return(
+          <Link href={link.path} key={index} className={`${link.path=== pathname && 'text-accent'}`}>
+            {link.name}
+          </Link>
+        )
+      })}
+    </nav>
   )
 }
 
